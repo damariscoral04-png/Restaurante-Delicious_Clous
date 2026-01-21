@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+  <meta charset="UTF-8">
+  <title>Delicious_Clous - Menú</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #C2A9F2 0%, #F3A0D2 35%, #9DB6F0 70%, #B3EEEB 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.3); 
+      max-width: 520px;
+      width: 100%;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    h1 {
+      text-align: center;
+      color: #4b0082;
+      margin-bottom: 5px;
+    }
+
+    p {
+      text-align: center;
+      color: #5e35b1;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      color: #4b0082;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.1);
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.6);
+      color: #000;
+      box-sizing: border-box;
+    }
+
+    .price-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background: rgba(75, 0, 130, 0.1);
+      text-align: center;
+      border: 2px solid rgba(75, 0, 130, 0.2);
+    }
+
+    .price-box span {
+      font-size: 22px;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .price-number {
+      color: #d81b60;
+      font-size: 24px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #f50057;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Restaurante Delicious_Clous</h1>
+  <p>Bienvenido al menú del día</p>
+
+  <label>Email</label>
+  <input type="email" id="email" placeholder="tuemail@gmail.com" required>
+
+  <label>Comida</label>
+  <select id="comida" onchange="calcularPrecio()">
+    <option value=""> Seleccione comida </option>
+    <option value="bolon">Bolón de queso</option>
+    <option value="mote">Tigrillo</option>
+    <option value="arroz">Seco de pollo</option>
+  </select>
+
+  <label>Bebida</label>
+  <select id="bebida" onchange="calcularPrecio()">
+    <option value=""> Seleccione bebida </option>
+    <option value="cafe">Café</option>
+    <option value="jugo">Jugo natural</option>
+    <option value="agua">Agua</option>
+  </select>
+
+  <label>Oferta</label>
+  <select id="oferta" onchange="calcularPrecio()">
+    <option value=""> Seleccione ofertas del día </option>
+    <option value="sin">Sin oferta</option>
+    <option value="2x1">2x1</option>
+    <option value="descuento">Descuento 10%</option>
+  </select>
+
+  <div class="price-box">
+    <span>Precio: <span class="price-number">$0.00</span></span>
+  </div>
+
+  <label>Fecha</label>
+  <input type="date" id="fecha">
+
+  <button onclick="enviar()">Enviar Pedido</button>
+</div>
+
+<script>
+  const preciosComida = { bolon: 2.50, mote: 3.00, arroz: 4.00 };
+  const preciosBebida = { cafe: 1.00, jugo: 1.50, agua: 0.80 };
+
+  document.getElementById("fecha").value = new Date().toISOString().slice(0, 10);
+
+  function calcularPrecio() {
+    const comida = document.getElementById("comida").value;
+    const bebida = document.getElementById("bebida").value;
+    const oferta = document.getElementById("oferta").value;
+    let precioTotal = 0;
+
+    if (comida) precioTotal += preciosComida[comida];
+    if (bebida) precioTotal += preciosBebida[bebida];
+    if (oferta === "2x1") precioTotal /= 2;
+    else if (oferta === "descuento") precioTotal *= 0.9;
+
+    document.querySelector(".price-number").innerText = `$${precioTotal.toFixed(2)}`;
+  }
+
+  function enviar() {
+    const email = document.getElementById("email").value;
+    const comida = document.getElementById("comida").value;
+    const bebida = document.getElementById("bebida").value;
+    const oferta = document.getElementById("oferta").value;
+    const fecha = document.getElementById("fecha").value;
+    const precio = document.querySelector(".price-number").innerText;
+
+    if (!email || !comida || !bebida || !oferta) {
+      alert("Por favor complete todos los campos");
+      return;
+    }
+
+    const webhookUrl = "https://damarisc.app.n8n.cloud/webhook-test/05b4f5bd-1e09-4ecd-9550-0fc6707ce683";
+
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        comida,
+        bebida,
+        oferta,
+        fecha,
+        precio
+      })
+    })
+    .then(() => {
+      alert("Pedido enviado correctamente");
+    })
+    .catch(error => {
+      alert("Error al enviar el pedido: " + error);
+    });
+  }
+</script>
+
+</body>
+</html>
