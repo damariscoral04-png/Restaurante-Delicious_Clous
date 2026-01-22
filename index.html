@@ -113,8 +113,8 @@
   <label>Comida</label>
   <select id="comida" onchange="calcularPrecio()">
     <option value=""> Seleccione comida </option>
-    <option value="bolon">Bolón </option>
-    <option value="mote">Tigrillo</option>
+    <option value="bolon">Bolón con queso </option>
+    <option value="mote">Mote con fritada</option>
     <option value="arroz">Seco de pollo</option>
   </select>
 
@@ -145,7 +145,7 @@
 </div>
 
 <script>
-  const preciosComida = { Bolón: 2.50, Tigrillo: 3.00, Seco de pollo: 4.00 };
+  const preciosComida = { Bolón: 2.50, mote: 3.00, Seco: 4.00 };
   const preciosBebida = { cafe: 1.00, jugo: 1.50, agua: 0.80 };
 
   document.getElementById("fecha").value = new Date().toISOString().slice(0, 10);
@@ -203,6 +203,7 @@
 
 </body>
 </html>
+
 
 
 
