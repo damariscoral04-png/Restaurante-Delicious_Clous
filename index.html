@@ -6,7 +6,7 @@
   <title>Delicious_Clous - Menú</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #C2A9F2 0%, #F3A0D2 35%, #9DB6F0 70%, #B3EEEB 100%);
       background-attachment: fixed;
       min-height: 100vh;
@@ -16,137 +16,80 @@
       justify-content: center;
       padding: 20px;
     }
-
     .container {
-      background: rgba(255, 255, 255, 0.3); 
-      max-width: 520px;
+      background: rgba(255, 255, 255, 0.85); 
+      max-width: 450px;
       width: 100%;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
-
-    h1 {
-      text-align: center;
-      color: #4b0082;
-      margin-bottom: 5px;
-    }
-
-    p {
-      text-align: center;
-      color: #5e35b1;
-      margin-top: 0;
-      margin-bottom: 20px;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 15px;
-      color: #4b0082;
-    }
-
+    h1 { text-align: center; color: #4b0082; }
+    label { font-weight: bold; display: block; margin-top: 15px; color: #4b0082; }
     select, input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      border-radius: 8px;
-      border: 1px solid rgba(0,0,0,0.1);
-      font-size: 16px;
-      background: rgba(255, 255, 255, 0.6);
-      color: #000;
-      box-sizing: border-box;
+      width: 100%; padding: 12px; margin-top: 8px; border-radius: 8px;
+      border: 1px solid #ddd; font-size: 16px; box-sizing: border-box;
     }
-
     .price-box {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 10px;
-      background: rgba(75, 0, 130, 0.1);
-      text-align: center;
-      border: 2px solid rgba(75, 0, 130, 0.2);
+      margin-top: 20px; padding: 15px; border-radius: 10px;
+      background: #f3e5f5; text-align: center; border: 2px solid #ce93d8;
     }
-
-    .price-box span {
-      font-size: 22px;
-      color: #000;
-      font-weight: bold;
-    }
-
-    .price-number {
-      color: #d81b60;
-      font-size: 24px;
-    }
-
+    .price-number { color: #d81b60; font-size: 24px; font-weight: bold; }
     button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 20px;
-      background: #ff4081;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
+      width: 100%; padding: 15px; margin-top: 25px; background: #ff4081;
+      color: white; border: none; border-radius: 8px; font-size: 18px;
+      font-weight: bold; cursor: pointer; transition: 0.3s;
     }
-
-    button:hover {
-      background: #f50057;
-      transform: translateY(-2px);
-    }
+    button:hover { background: #f50057; transform: scale(1.02); }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>Restaurante Delicious_Clous</h1>
-  <p>Bienvenido al menú del día</p>
+  <h1>Delicious_Clous</h1>
+  <p style="text-align:center">Pide tu plato favorito</p>
 
-  <label>Email</label>
-  <input type="email" id="email" placeholder="tuemail@gmail.com" required>
+  <label>Tu Correo Electrónico</label>
+  <input type="email" id="email" placeholder="ejemplo@correo.com" required>
 
-  <label>Comida</label>
+  <label>Selecciona tu Comida</label>
   <select id="comida" onchange="calcularPrecio()">
-    <option value=""> Seleccione comida </option>
-    <option value="bolon">Bolón con queso </option>
-    <option value="mote">Mote con fritada</option>
-    <option value="arroz">Seco de pollo</option>
+    <option value=""> Elige un plato </option>
+    <option value="bolon">Bolón con queso ($2.50)</option>
+    <option value="mote">Mote con fritada ($3.00)</option>
+    <option value="arroz">Seco de pollo ($4.00)</option>
   </select>
 
-  <label>Bebida</label>
+  <label>Selecciona tu Bebida</label>
   <select id="bebida" onchange="calcularPrecio()">
-    <option value=""> Seleccione bebida </option>
-    <option value="cafe">Café</option>
-    <option value="jugo">Jugo natural</option>
-    <option value="agua">Agua</option>
+    <option value=""> Elige una bebida </option>
+    <option value="cafe">Café ($1.00)</option>
+    <option value="jugo">Jugo natural ($1.50)</option>
+    <option value="agua">Agua ($0.80)</option>
   </select>
 
-  <label>Oferta</label>
+  <label>Ofertas del Día</label>
   <select id="oferta" onchange="calcularPrecio()">
-    <option value=""> Seleccione ofertas del día </option>
     <option value="sin">Sin oferta</option>
-    <option value="2x1">2x1</option>
+    <option value="2x1">Promoción 2x1</option>
     <option value="descuento">Descuento 10%</option>
   </select>
 
   <div class="price-box">
-    <span>Precio: <span class="price-number">$0.00</span></span>
+    <span>Total a Pagar: <span class="price-number" id="precio_display">$0.00</span></span>
   </div>
 
-  <label>Fecha</label>
+  <label>Fecha de entrega</label>
   <input type="date" id="fecha">
 
-  <button onclick="enviar()">Enviar Pedido</button>
+  <button onclick="enviar()">Confirmar Pedido</button>
 </div>
 
 <script>
-  const preciosComida = { Bolón: 2.50, mote: 3.00, Seco: 4.00 };
-  const preciosBebida = { cafe: 1.00, jugo: 1.50, agua: 0.80 };
+  const precios = {
+    bolon: 2.50, mote: 3.00, arroz: 4.00,
+    cafe: 1.00, jugo: 1.50, agua: 0.80
+  };
 
   document.getElementById("fecha").value = new Date().toISOString().slice(0, 10);
 
@@ -154,55 +97,49 @@
     const comida = document.getElementById("comida").value;
     const bebida = document.getElementById("bebida").value;
     const oferta = document.getElementById("oferta").value;
-    let precioTotal = 0;
+    let total = 0;
 
-    if (comida) precioTotal += preciosComida[comida];
-    if (bebida) precioTotal += preciosBebida[bebida];
-    if (oferta === "2x1") precioTotal /= 2;
-    else if (oferta === "descuento") precioTotal *= 0.9;
+    if (comida) total += precios[comida];
+    if (bebida) total += precios[bebida];
+    
+    if (oferta === "2x1") total /= 2;
+    else if (oferta === "descuento") total *= 0.9;
 
-    document.querySelector(".price-number").innerText = `$${precioTotal.toFixed(2)}`;
+    document.getElementById("precio_display").innerText = `$${total.toFixed(2)}`;
   }
 
   function enviar() {
-    const email = document.getElementById("email").value;
-    const comida = document.getElementById("comida").value;
-    const bebida = document.getElementById("bebida").value;
-    const oferta = document.getElementById("oferta").value;
-    const fecha = document.getElementById("fecha").value;
-    const precio = document.querySelector(".price-number").innerText;
+    const datos = {
+      email: document.getElementById("email").value,
+      comida: document.getElementById("comida").value,
+      bebida: document.getElementById("bebida").value,
+      oferta: document.getElementById("oferta").value,
+      fecha: document.getElementById("fecha").value,
+      precio: document.getElementById("precio_display").innerText
+    };
 
-    if (!email || !comida || !bebida || !oferta) {
-      alert("Por favor complete todos los campos");
+    if (!datos.email || !datos.comida || !datos.bebida) {
+      alert(" Por favor completa los campos principales.");
       return;
     }
 
-    // URL CAMBIADA A PRODUCCIÓN 
-    const webhookUrl = "https://damarisc.app.n8n.cloud/webhook/05b4f5bd-1e09-4ecd-9550-0fc6707ce683";
+    const webhookUrl = "https://damarisc.app.n8n.cloud/prueba-de-webhook/05b4f5bd-1e09-4ecd-9550-0fc6707ce683";
 
     fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        comida,
-        bebida,
-        oferta,
-        fecha,
-        precio
-      })
+      body: JSON.stringify(datos)
     })
-    .then(() => {
-      alert("Pedido enviado correctamente");
+    .then(res => {
+      if(res.ok) alert(" ¡Pedido recibido! Te enviaremos un correo.");
+      else alert(" Error en el servidor.");
     })
-    .catch(error => {
-      alert("Error al enviar el pedido: " + error);
-    });
+    .catch(err => alert(" Error de conexión."));
   }
 </script>
-
 </body>
 </html>
+
 
 
 
