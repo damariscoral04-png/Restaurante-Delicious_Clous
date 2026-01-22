@@ -2,6 +2,7 @@
 <html lang="es">
 <head> 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Delicious_Clous - Menú</title>
   <style>
     body {
@@ -176,7 +177,8 @@
       return;
     }
 
-    const webhookUrl = "https://damarisc.app.n8n.cloud/webhook-test/05b4f5bd-1e09-4ecd-9550-0fc6707ce683";
+    // URL CAMBIADA A PRODUCCIÓN (se quitó el -test)
+    const webhookUrl = "https://damarisc.app.n8n.cloud/webhook/05b4f5bd-1e09-4ecd-9550-0fc6707ce683";
 
     fetch(webhookUrl, {
       method: "POST",
@@ -201,3 +203,4 @@
 
 </body>
 </html>
+
